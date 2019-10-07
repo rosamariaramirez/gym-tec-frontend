@@ -1,26 +1,68 @@
 import React from 'react';
-import logo from './logo.svg';
+import User from './views/User';
+import {
+  Jumbotron,
+  Container,
+  Row,
+  Col
+} from 'reactstrap';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+export default class App extends React.Component {
 
-export default App;
+  constructor() {
+    super();
+    this.state = {
+      sections: [
+        {
+          setup: "Tutoriales de ejercicios",
+          punchline: ""
+        },
+        {
+          setup: "Horarios de coaches",
+          punchline: "Carlos Roberto Gomez y Angy Rodriguez"
+        },
+        {
+          setup: "Perfil de usuario",
+          punchline: "Datos personales"
+        },
+        {
+          setup: "Rutina y horario de ejercicio",
+          punchline: "Rutina personal y horarios"
+        }
+      ]
+    }
+  }
+
+
+
+  render() {
+
+    let jokeCards = this.state.sections.map(sections_data => {
+      return (
+        <Col className="p-3" sm="4">
+            <User sections_data={sections_data} />
+        </Col>
+      )
+    })
+
+    return (
+      <div>
+        <Jumbotron>
+          <h1 className="display-3">GymTec+</h1>
+          <p className="lead">Bienvenido a GymTec. Consulta coaches, horarios y ejercicios. </p>
+          <hr className="my-2" />
+          <p> Preparando tu rutina diaria.</p>
+          <p className="lead">
+          </p>
+        </Jumbotron>
+        <Container fluid>
+          <Row>
+            {jokeCards}
+          </Row>
+        </Container>
+      </div>
+    );
+  }
+  
+};
